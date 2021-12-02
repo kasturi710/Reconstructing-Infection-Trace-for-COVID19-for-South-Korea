@@ -1,8 +1,6 @@
-## Welcome to GitHub Pages
-
-You can use the [editor on GitHub](https://github.com/BonJovi1/CSE8803/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## Identifying Likely-Infected Nodes and Reconstructing the Infection Trace for COVID-19
+![Meet the Team](images/team.png)
+<center>Meet the team! (Vidushi, Abhinav, and Kasturi from L-R)</center>
 
 ### Markdown
 
