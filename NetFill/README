@@ -1,0 +1,21 @@
+Author: Shashidhar Sundareisan
+Requirements: MATLAB 2011 or later.
+
+To run NetFill and Top-l-dni on two seed disconnected on a Linux/mac system:
+
+Just run make on the current directory
+(I am assuming matlab is installed on your system and the command line interpreter is invoked by "matlab -nodisplay". If not then changes have to be made in the file demo.sh)
+
+You can also run NetFill and Top-l-dni on two seed disconnected on a windows system:
+By opening matlab and running the DEMO.m in the src/ folder.
+
+For other data sets you need to check DEMO.m on how to invoke Topldni.m (Top-l-dni in the paper) and complete.m (for NetFill).
+
+Note: "visualize_grid.m" will work only for 60x60 grid graph(as described in the paper).
+
+Output graphs can be seen in the output/grid-disconnected-NetFill.pdf and output/grid-disconnected-Top-l-dni.pdf
+
+If you want to try your own graph then the input G should be an adjacency matrix. Variables S, SD, D etc. should be of size [1, length(G)] i.e. like indicator variables.
+
+Credits: I acknowledge the authors of "Spotting Culprits in Epidemics: How many and which ones?", B. Aditya Prakash, Jilles Vreeken and Christos Faloutsos for sharing the code for NetSleuth(NetSleuth.m) with me.
+
