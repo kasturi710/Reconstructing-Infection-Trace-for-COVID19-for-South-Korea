@@ -1,35 +1,13 @@
 ## Identifying Likely-Infected Nodes and Reconstructing the Infection Trace for COVID-19
-![Meet the Team](images/team.png)
+![Meet the Team](team.jpg)
 <center>Meet the team! (Vidushi, Abhinav, and Kasturi from L-R)</center>
 
-### Markdown
+### About the project
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+As a part of the course CSE 8803, we undertook the task of indentifying missed infections in the reported cases of COVID spread across Singapore and Korea. The choice of the countries of study was decided on the basis of data available. Singapore and Korea had extensively monitored the spread of COVID and systematically recorded and released relevant data. The Singapore dataset can be found here: [Singapore Dataset](https://www.againstcovid19.com/singapore/dashboard) and the Korea Dataset can be found here: [Korea Dataset](https://www.kaggle.com/kimjihoo/coronavirusdataset). 
 
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/BonJovi1/CSE8803/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+We utilised two state of the art algorithms towards this end: [NETFILL](https://epubs.siam.org/doi/pdf/10.1137/1.9781611974010.47) and [CuLT](https://dl.acm.org/doi/pdf/10.1145/2939672.2939865). We were able to successfully reconstruct the spread of COVID in Korea using CuLT very accurately. We were also able to find cuplrit and missed infections in small cliques of infections taken from the Singapore dataset using NETFILL. To find the details of the experiments and inferences made on the calculated outputs, please refer to the [Report]() or [Presentation]() of the talk given in class. 
 
 ### Support or Contact
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+If you have any questions regarding our work feel free to reach out to us or open issues in the repository!
