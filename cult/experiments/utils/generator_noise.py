@@ -487,7 +487,9 @@ def readFile(filepath, mode = 'general'):
                 break
             line = line.strip()
             items = line.split('\t')
-            tstamp = datetime.strptime(items[0], '%Y-%m-%d %H:%M:%S')
+            # tstamp = datetime.strptime(items[0], '%Y-%m-%d %H:%M:%S')
+            # print "Item ", items
+            tstamp = datetime.strptime(items[0], '%Y-%m-%d') # for the korea dataset
             ##print items
             #record = map(int, items[1:])
             if mode == 'grid':
@@ -497,6 +499,7 @@ def readFile(filepath, mode = 'general'):
             ##print n1, n2
             #exit()
             info = map(int, items[3:])
+            # print "Information saved:", info
 
             #record = items[1:3]+ map(int, items[3:])
             if n1 == n2:
@@ -508,9 +511,9 @@ def readFile(filepath, mode = 'general'):
                 infection_track[n1] = infection_track.get(n1, []) + [n2]
 
             G.add_edge(n1, n2)
-            if info[-2] == 1:
+            if info[-2] == 1: # whether n1 is seed
                 seeds.add(n1)
-            if info[-1] == 1:
+            if info[-1] == 1: # whether n2 is seed
                 seeds.add(n2)
 
             if info[0] == 1:

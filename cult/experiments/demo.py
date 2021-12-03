@@ -24,6 +24,8 @@ dt_sec = 100
 sources, immuned, sinks, reported, unreported, sources_TnI, sinks_TnI, unreported_TnI = get_sinks_and_sources_shifted(
     TS, G=nx.Graph(), mode='all', dt_sec=dt_sec, rep_prob=reportingP)
 print len(sinks), len(sources), len(reported['infected'])
+
+print "Reported Infections !!", reported['infected']
 #exit()
 #SP = shortestPath1(TS, sources, sinks, immuned, unreported)
 SP = shortestPath1(TS, sources, sinks, immuned, unreported)
@@ -37,7 +39,100 @@ print output_paths
 
 out_cost, out_interactions, out_causality = get_out_cost(output_paths, sources, sinks, unreported)
 print 'cost of our solution', out_cost
+
+print "Output Interactions", out_interactions
+print "Output Causality", out_causality
+print "GT Causality", gt_causality
 #exit()
+
+## Set Labels to simplified version of the Patient ID
+for i, obj in enumerate(out_causality):
+    out_causality[i] = (obj[0]%1000, obj[1]%1000)
+
+for i, obj in enumerate(gt_causality):
+    gt_causality[i] = (obj[0]%1000, obj[1]%1000)
+
+print "Output Causality", out_causality
+print "GT Causality", gt_causality
+
+reported_infections = []
+for node in list(reported['infected']):
+    print node
+    reported_infections.append(node%1000)
+
+print "Initially Reported Infections", reported_infections
+
+missed_infections = []
+# find newly discovered nodes (missed infections)
+for i, obj in enumerate(out_causality):
+    if obj[0] in reported_infections and obj[1] in reported_infections:
+        continue
+    if obj[0] not in reported_infections and obj[0] not in missed_infections:
+        missed_infections.append(obj[0])
+    if obj[1] not in reported_infections and obj[1] not in missed_infections:
+        missed_infections.append(obj[1])
+
+print "Missed Infections", missed_infections
+
+# exit()
+
+# Create graph
+G1 = nx.DiGraph()
+G1.add_edges_from(out_causality)
+
+## Set Colors for newly discovered nodes as red. 
+node_colors = ['red' if node in reported_infections else 'grey' for node in G1.nodes()]
+
+# Now we need to find seed nodes -with indegree 0 and outdegree > 1
+seed_nodes = []
+d_in=G1.in_degree(G1)
+d_out=G1.out_degree(G1)
+for n in G1.nodes():
+    if d_in[n]==0 and d_out[n] > 1: 
+        seed_nodes.append(n)
+
+ctr = 0
+for node in G1.nodes:
+    if(node in seed_nodes):
+        node_colors[ctr] = 'green'
+    ctr = ctr + 1;
+
+### Plot the recovered trace graph
+nx.draw(G1, pos = nx.nx_pydot.graphviz_layout(G1), node_size=800, node_color=node_colors, with_labels=True)
+
+name = dataset + '_recovered_trace' + '.pdf'
+plt.tight_layout()
+name = plt.savefig(name)
+plt.show()
+
+# Create graph for GT graph
+G2 = nx.DiGraph()
+G2.add_edges_from(gt_causality)
+
+## Set Colors for newly discovered nodes as red. 
+node_colors = ['grey' if node in reported_infections else 'red' for node in G2.nodes()]
+
+seed_nodes = []
+d_in=G2.in_degree(G2)
+d_out=G2.out_degree(G2)
+for n in G2.nodes():
+    if d_in[n]==0 and d_out[n] > 1: 
+        seed_nodes.append(n)
+
+ctr = 0
+for node in G2.nodes:
+    if(node in seed_nodes):
+        node_colors[ctr] = 'green'
+    ctr = ctr + 1;
+
+### Plot the recovered trace graph
+nx.draw(G2, pos = nx.nx_pydot.graphviz_layout(G2), node_size=800, node_color=node_colors, with_labels=True)
+
+name = dataset + '_gt_trace' + '.pdf'
+plt.tight_layout()
+name = plt.savefig(name)
+plt.show()
+
 
 print 'correct interactions', len(set(gt_interactions).intersection(set(out_interactions)))
 print 'intesection precision', np.divide(1.0 * len(set(gt_interactions).intersection(set(out_interactions))),
@@ -93,7 +188,7 @@ print set(found_seeds.keys()).intersection(set(seeds))
 print 'how far in time'
 slack, tau = how_far_intime(output_paths, moment_of_infection)
 print 'total tau', tau
-print 'slack', np.nanmean(slack), stats.nanmedian(slack)
+# print 'slack', np.nanmean(slack), stats.nanmedian(slack)
 
 folder = ''
 pred_recover = False
@@ -109,9 +204,9 @@ prec_ub_infected, recall_ub_infected, prec_ub_recovered, recall_ub_recovered, ab
 degrees_out = [G.degree(i) for i in set_nodes[-1]]
 degrees_gt = [G.degree(i) for i in set_nodes_gt[-1]]
 
-print stats.nanmedian(prec_infected), stats.nanmedian(recall_infected), stats.nanmedian(F1)
-print stats.nanmedian(prec_lb_infected), stats.nanmedian(recall_lb_infected), stats.nanmedian(F1_lb)
-print stats.nanmedian(prec_ub_infected), stats.nanmedian(recall_ub_infected), stats.nanmedian(F1_ub)
+# print stats.nanmedian(prec_infected), stats.nanmedian(recall_infected), stats.nanmedian(F1)
+# print stats.nanmedian(prec_lb_infected), stats.nanmedian(recall_lb_infected), stats.nanmedian(F1_lb)
+# print stats.nanmedian(prec_ub_infected), stats.nanmedian(recall_ub_infected), stats.nanmedian(F1_ub)
 
 unique_out = str(reportingP).replace('.', '-') + '_' + dataset + '_' + str(uuid.uuid4())
 
