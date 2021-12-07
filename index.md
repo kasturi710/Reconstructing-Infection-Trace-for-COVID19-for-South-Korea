@@ -11,7 +11,7 @@ As a part of CSE 8803, we undertook the task of indentifying missed infections i
 
 We utilised two state of the art algorithms towards this end: [NETFILL](https://epubs.siam.org/doi/pdf/10.1137/1.9781611974010.47) and [CuLT](https://dl.acm.org/doi/pdf/10.1145/2939672.2939865). We were able to successfully reconstruct the spread of COVID in Korea using CuLT very accurately. We were also able to find cuplrit and missed infections in small cliques of infections. To find the details of the experiments and inferences made on the calculated outputs, please refer to: 
 - [Report](report.pdf)
-- [Presentation]() of the talk given in class. 
+- [Presentation](https://gtvault-my.sharepoint.com/:p:/g/personal/kshriniwas3_gatech_edu/EcY7P0JhUIpNu7fjbY6tldgBAynYpBCNYurPoQ020Hfc5Q?e=i1W7LL) of the talk given in class. 
 - [Code](https://github.com/BonJovi1/CSE8803)
 
 
