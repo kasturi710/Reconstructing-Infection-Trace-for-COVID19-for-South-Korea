@@ -1,4 +1,3 @@
-# CSE8803-Data Science for Epidemiology
 ## Identifying Likely-Infected Nodes and Reconstructing the Infection Trace for COVID-19
 
 ### Overview
